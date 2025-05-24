@@ -1,0 +1,10 @@
+entry control:first condition while for
+exit:first block do while
+
+
+
+parts of loop
+
+1.init
+2.condition
+3.modification
