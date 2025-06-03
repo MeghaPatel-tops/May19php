@@ -1,6 +1,6 @@
 <?php
  
-   require_once('comman.php');
+   include_once('comman.php');
 
  
    for($i=1;$i<=5;$i++){
