@@ -1,3 +1,15 @@
+<?php
+include('db.php');
+   if(isset($_REQUEST['cid'])){
+        $cid = $_REQUEST['cid'];
+        $query = "select * from category where cid=$cid";
+        $req= $connection->query($query);
+        $catData = $req->fetch_object();
+        
+   }
+
+?>
+
 <!doctype html>
 <html lang="en">
   <!--begin::Head-->
@@ -23,12 +35,15 @@
               <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Category Name</label>
-                    <input type="text" class="form-control" id="" name="cname">
+                    <input type="text" class="form-control" id="" name="cname" value="<?php echo $catData->cname?>">
                 </div>
                 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Image</label>
+                    <img src="uploads/<?php echo $catData->cimage?>" alt="" height="50px" width="50px">
                     <input type="file" class="form-control" id="" name="cimage">
+
+                    <input type="hidden" name="himg" value="<?php echo $catData->cimage?>">
                 </div>
                
                 <input type="submit" class="btn btn-primary" value="Submit" name="submit">
@@ -56,14 +71,15 @@
                 move_uploaded_file($tempPath,"uploads/".$filename);
             }
             else{
-                echo "<script>alert('upload  Image')</script>";
-                exit;
+                 $filename = $_POST['himg'];
             }
 
-            $query= "insert into category(cname,cimage)values('$cname','$filename')";
+           
+
+            $query= "update category set cname= '$cname', cimage = '$filename' where cid=$cid";
             $res = $connection->query($query);
             if($res){
-                 echo "<script>alert('Data insert successfully');
+                 echo "<script>alert('Data update successfully');
                  window.location.href='category.php';
                  </script>";
                  //header("Location:category.php");

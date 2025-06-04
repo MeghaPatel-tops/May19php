@@ -1,3 +1,14 @@
+<?php  
+   include('db.php');
+   $query= "select * from category";
+   $req = $connection->query($query);
+   while($row= $req->fetch_object()){
+        $categoryArray[]=$row;
+   }
+  //  echo "<pre>";
+  //  print_r($categoryArray);
+  //  exit;
+?>
 <!doctype html>
 <html lang="en">
   <!--begin::Head-->
@@ -24,30 +35,38 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">CategoryName</th>
+      <th scope="col">Image</th>
+      <th colspan=2>Action</th>
+      
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+        <?php
+          $i=1;
+           if(isset($categoryArray)){
+             foreach($categoryArray as $key){
+                ?>
+                  <tr>
+                    <td><?php echo $i?></td>
+                    <td><?php echo $key->cname?></td>
+                    <td><img src="uploads/<?php echo $key->cimage?>" alt="" height="50px" width="50px"></td>
+                    <td>
+                      
+                    <a href="categorydelete.php?cid=<?php echo $key->cid?>" class="btn btn-danger">Delete</a>
+
+
+
+                      <a href="categoryedit.php?cid=<?php echo $key->cid;?>" class="btn btn-success">Edit</a>
+                    </td>
+                  </tr>
+
+              <?php
+              $i++;
+            }
+           }
+        
+        ?>
   </tbody>
 </table>
 
