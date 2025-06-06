@@ -55,4 +55,15 @@
       integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
       crossorigin="anonymous"
     />
+
+    <script>
+          function deleteProduct(id){
+            alert(id);
+             let status= confirm("You want to delete Data??");
+             if(status){
+              window.location.href='deleteproduct.php?pid='+id;
+             }
+          }
+
+  </script>
   </head>

@@ -1,7 +1,26 @@
+<?php
+include('db.php');
+$query = "SELECT * FROM products join category on products.categoryId = category.cid;";
+$req = $connection->query($query);
+
+while($row= $req->fetch_object()){
+    $productData[]=$row;
+}
+
+// echo "<pre>";
+// print_r($productData);
+// exit;
+
+
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <!--begin::Head-->
   <?php  include('head.php');?>
+  
   <!--end::Head-->
   <!--begin::Body-->
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -24,30 +43,42 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th>Image</th>
+      <th>CategoryId</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+     <?php
+     $i=1;
+       if(isset($productData)){
+           foreach($productData as $key){
+            ?>
+               <tr>
+                    <th scope="row"><?php echo $i;?></th>
+                    <td><?php echo $key->productName;?></td>
+                    <td><?php echo $key->price;?></td>
+                    <td><?php echo $key->description;?></td>
+                    <td><img src="uploads/<?php echo $key->productImage;?>" alt="" height="50px" width="50px"></td>
+                     <td><?php echo $key->cname;?></td>
+                     <td><button class="btn btn-danger" onclick="deleteProduct(<?php echo $key->pid?>)">Delete</button>
+                    <a href="editproduct.php?pid=<?php echo $key->pid?>" class="btn btn-success">Edit</a>
+                    
+                    </td>
+                  </tr>
+            <?php
+            $i++;
+          
+        }
+
+       }
+     
+     
+     ?>
+   
   </tbody>
 </table>
 
@@ -58,4 +89,6 @@
         </div>
         <!--end::App Content-->
       </main>
+      
    <?php include('footer.php')?>
+   

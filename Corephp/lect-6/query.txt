@@ -1,0 +1,7 @@
+CREATE TABLE products(pid int PRIMARY KEY AUTO_INCREMENT , categoryId int ,productName varchar(100), price float,description text,productImage varchar(250),FOREIGN KEY(categoryId) REFERENCES category(cid));
+                  
+
+TRUNCATE TABLE products;
+ drop TABLE products
+
+SELECT * FROM products join category on products.categoryId = category.cid;

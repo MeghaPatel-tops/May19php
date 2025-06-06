@@ -5,9 +5,6 @@
    while($row= $req->fetch_object()){
         $categoryArray[]=$row;
    }
-  //  echo "<pre>";
-  //  print_r($categoryArray);
-  //  exit;
 ?>
 <!doctype html>
 <html lang="en">
