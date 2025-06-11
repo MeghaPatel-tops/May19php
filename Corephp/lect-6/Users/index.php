@@ -1,3 +1,12 @@
+<?php
+
+   include('../db.php');
+  
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +58,27 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+
+      <?php
+        if(isset($_SESSION['user'])){
+            ?>
+             <li><a href="#"><span class="glyphicon glyphicon-user"></span>
+        <?php echo ucfirst($_SESSION['user']->uname)?>
+      
+      </a></li>
+        <li><a href="logout.php">Logout</span>   
+      
+      </a></li>
+            <?php
+        }
+        else{
+          ?>
+            <li><a href="login.php">LogIn</span>
+          <?php
+        }
+      
+      ?>
+       
         <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
       </ul>
     </div>

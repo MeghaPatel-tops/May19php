@@ -5,3 +5,5 @@ TRUNCATE TABLE products;
  drop TABLE products
 
 SELECT * FROM products join category on products.categoryId = category.cid;
+
+SELECT * FROM `users` WHERE email ="m@gmail.com" and password="123"

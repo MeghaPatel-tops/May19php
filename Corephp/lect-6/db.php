@@ -1,5 +1,5 @@
 <?php
-
+  session_start();
   //$con = new mysqli("hostname","username","pass","databasename");
    $connection = new mysqli("localhost","root","","may19php");
 

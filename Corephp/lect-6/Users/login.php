@@ -86,7 +86,7 @@
         .button-div{
              padding: 10px;
         }
-        .button-div button{
+        .button-div .btn{
             padding: 10px;
             background-color:rgb(2, 2, 62);
             color: white;
@@ -131,24 +131,35 @@
     <div class="conatiner">
         <div class="form-div">
             <div class="form-content">
+                <form action="commancode.php" method="post">
                 <h1>Login Form</h1>
                 <div class="input-div">
                 
-                <input type="text" name="uname" id="" placeholder="enter" require>
-                <label for="">Username</label>
+                <input type="text" name="email" id="" placeholder="enter" require value="<?php
+                echo $_COOKIE['email'] ??"";
+                ?>">
+                <label for="">Email</label>
                 </div>
                 
 
             <div class="input-div">
                
-                <input type="password" name="" id="" placeholder="enter" require>
+                <input type="password" name="pass" id="" placeholder="enter" require value="<?php
+                echo $_COOKIE['pass']??""?>";
+                ?>
                  <label for="">Password</label>
             </div>
-            <div class="button-div">
-                <button>login</button>
+              <div class="button-div">
+               
+                <input type="checkbox" name="check" id="" >
+                 <label for="">Reminder Me</label>
             </div>
+            <div class="button-div">
+               <input type="submit" value="Login" name="loginbtn" class="btn">
+            </div>
+            </form>
             <div class="div-info">
-                <span>First Time </span><a href="register.php">Register</a>
+                <span>First Time </span><a href="register.php" >Register</a>
             </div>
             </div>
         </div>
