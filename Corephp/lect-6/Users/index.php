@@ -1,6 +1,19 @@
 <?php
 
    include('../db.php');
+  $query= "select * from products";
+  $req= $connection->query($query);
+  while($row = $req->fetch_object()){
+      $productData[]=$row;
+  }
+  if(isset($_SESSION['user'])){
+    $uid = $_SESSION['user']->uid;
+    $query1= "select count(cid) as countcart from cart where uid=$uid";
+    $req= $connection->query($query1);
+    $count = $req->fetch_object()->countcart; 
+   
+  }
+   
   
 
 
@@ -33,6 +46,26 @@
       background-color: #f2f2f2;
       padding: 25px;
     }
+    .badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px; 
+}
   </style>
 </head>
 <body>
@@ -79,7 +112,7 @@
       
       ?>
        
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> <span class='badge badge-warning' id='lblCartCount'> <?php echo $count ?? 0?></span>Cart</a></li>
       </ul>
     </div>
   </div>
@@ -87,55 +120,27 @@
 
 <div class="container">    
   <div class="row">
-    <div class="col-sm-4">
+    <?php
+       foreach($productData as $key){
+          ?>
+           <div class="col-sm-4">
       <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="panel-heading"><?php echo $key->productName;?></div>
+        <div class="panel-body"><img src="../Admin/uploads/<?php echo $key->productImage?>" class="img-responsive" style="width:100%;height:200px"  alt="Image"></div>
+        <div class="panel-footer"><span><b>&#x20B9;<?php echo $key->price;?></b></span>
+        <a href="commancode.php?cart=true&pid=<?php echo $key->pid;?>" class="btn btn-primary btn-large">Add To Cart</a>
+      </div>
       </div>
     </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-danger">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-success">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-  </div>
-</div><br>
+          <?php
+       }
+    
+    ?>
+   
+   
+ 
 
-<div class="container">    
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-  </div>
-</div><br><br>
+
 
 <footer class="container-fluid text-center">
   <p>Online Store Copyright</p>  

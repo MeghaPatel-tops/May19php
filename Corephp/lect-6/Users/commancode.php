@@ -52,5 +52,31 @@
         }
    }
 
+   //====================Add to Cart========================
+   if(isset($_REQUEST['cart']) && $_REQUEST['cart']==true){
+         $pid=$_REQUEST['pid'];
+         if(isset($_SESSION['user'])){
+            $uid = $_SESSION['user']->uid;
+             $query = "insert into cart(uid,pid)values($uid,$pid)";
+             $result=$connection->query($query);
+             if(isset($result)){
+                echo "<script>alert('Product Added into cart');
+                      window.location.href='index.php';
+                      </script>";
+             }
+             else{
+                echo "<script>alert('Something Wrong try again');
+          window.location.href='index.php';
+          </script>";
+             }
+             
+         }
+         else{
+             echo "<script>alert('please Login First');
+          window.location.href='login.php';
+          </script>";
+         }
+   }
+
 
 ?>
