@@ -78,5 +78,35 @@
          }
    }
 
+   //==================cart item qty remove==================
+   if(isset($_REQUEST['cartremove'])){
+      $cid = $_REQUEST['cartid'];
+      $qty = $_REQUEST['qty'];
+      if($qty <= 1){
+          $query = "delete from cart where cid=$cid";
+      }
+      else{
+        $newqty = $qty-1;
+         $query = "update cart set qty= $newqty where cid=$cid";
+      }
+      $result = $connection->query($query);
+      if(isset($result)){
+         header("Location:usercart.php");
+      }
+   }
+
+   //=================cart item qty add=================================
+if(isset($_REQUEST['cartadd'])){
+      $cid = $_REQUEST['cartid'];
+      $qty = $_REQUEST['qty'];
+     
+        $newqty = $qty+1;
+         $query = "update cart set qty= $newqty where cid=$cid";
+    
+      $result = $connection->query($query);
+      if(isset($result)){
+         header("Location:usercart.php");
+      }
+   }
 
 ?>

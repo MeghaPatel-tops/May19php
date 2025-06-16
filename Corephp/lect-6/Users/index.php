@@ -112,7 +112,7 @@
       
       ?>
        
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> <span class='badge badge-warning' id='lblCartCount'> <?php echo $count ?? 0?></span>Cart</a></li>
+        <li><a href="usercart.php"><span class="glyphicon glyphicon-shopping-cart"></span> <span class='badge badge-warning' id='lblCartCount'> <?php echo $count ?? 0?></span>Cart</a></li>
       </ul>
     </div>
   </div>
