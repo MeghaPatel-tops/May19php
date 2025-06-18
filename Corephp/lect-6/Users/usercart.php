@@ -161,7 +161,7 @@
             <tfoot>
                 <tr>
                     <td colspan="5" align="right"><b>Grand Total:<?php echo $total;?></b>
-                    <button class="btn btn-primary" id="pay-button">PayNow</button>
+                    <button class="btn btn-primary" onclick="order()">PayNow</button>
                 </td>
                 </tr>
             </tfoot>
@@ -187,13 +187,27 @@
 <!--Inside index.html -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-   var options = {
+   
+   
+  
+
+   function order(){
+    alert("mnbnmbmnb");
+        $.ajax({
+          url:'test.php',
+          data:{amount:<?php echo $total;?>},
+          success:function(data){
+            alert(data);
+            data = JSON.parse(data);
+            alert(data.id)
+            
+              var options = {
        "key": "rzp_test_GqyF5g931GFt3g", 
-       "amount": "49900", 
+       "amount": "<?php echo $total;?>", 
        "currency": "INR",
        "name": "Dummy Academy",
        
-       "order_id": "order_HdPuQW0s9hY9AU",  
+       "order_id": data.id,  
        "handler": function (response){
            console.log(response)
            alert("This step of Payment Succeeded");
@@ -208,14 +222,18 @@
    };
    var razorpayObject = new Razorpay(options);
    console.log(razorpayObject);
+   razorpayObject.open();
+       e.preventDefault();
    razorpayObject.on('payment.failed', function (response){
          console.log(response);
          alert("This step of Payment Failed");
    });
-   
-   document.getElementById('pay-button').onclick = function(e){
-       razorpayObject.open();
-       e.preventDefault();
+
+
+
+            
+          }
+        })
    }
 </script>
 </body>

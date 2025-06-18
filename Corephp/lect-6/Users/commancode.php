@@ -1,4 +1,8 @@
 <?php
+
+   
+
+
     include('../db.php');
    if(isset($_POST['register'])){
         $uname    =$_POST['uname'];
