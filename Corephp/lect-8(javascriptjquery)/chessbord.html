@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .even{
+            height: 50px;
+            width: 50px;
+            background-color: black;
+            color: white;
+        }
+        .odd{
+            height: 50px;
+            width: 50px;
+            background-color:gray
+        }
+        .main{
+            height: 400px;
+            width: 400px;
+            border: 2px solid red;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="genChessbord()">
+        Click
+    </button>
+    <div class="main" id="chess">
+
+    </div>
+</body>
+
+    <script>
+        function genChessbord(){
+            let str="";
+            let m=1;
+            for(i=1 ;i<=8 ;i++){
+                
+                for(j=1;j<=8;j++){
+                    if((i+j)%2==0){
+                        str+= `<div class="even"></div>`;
+                    }
+                    else{
+                        str+=`<div class="odd"></div>`;
+                    }
+                    m++;
+                }
+               
+            }
+             console.log(str);
+             document.getElementById('chess').innerHTML = str;
+        }
+    </script>
+</html>

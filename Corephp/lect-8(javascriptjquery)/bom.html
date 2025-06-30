@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function alertExample(){
+            alert("Javascript Tutorials");
+        }
+        function confirmExample(){
+            let status = confirm("Are you sure want to delete Data?");
+            if(status){
+                alert("Done");
+            }
+            else{
+                alert("try again");
+            }
+        }
+        function promptExample(){
+            let username = prompt("Enter your Name","ex.john");
+            alert(username);
+        }
+    </script>
+</head>
+<body>
+<button onclick="alertExample()">Alert Example</button>
+<button onclick="confirmExample()">
+    Confirm Exmaple
+</button>
+<button onclick="promptExample()">
+    Prompt example
+</button>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .textex{
+            height: 40px;
+            padding: 2px;
+            width: 200px;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        function findEvenOdd(){
+            let number1 = document.getElementById('num').value;
+        
+            if(number1 % 2 ==0){
+                alert("num is Even");
+            }
+            else{
+                alert("num is odd");
+            }
+        }
+    </script>
+</head>
+<body>
+   <form method="post">
+      <label for="">Enter the number</label>
+      <input type="text" name="" id="num" class="textex">
+      <br>
+      <input type="button" value="Click" onclick="findEvenOdd()">
+   </form>
+</body>
+</html>
