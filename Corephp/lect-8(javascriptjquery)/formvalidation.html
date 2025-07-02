@@ -16,6 +16,7 @@
 
    function  formValidtion(){
         let email = document.getElementById('email').value;
+        let pass = document.getElementById('pwd').value;
         if(email == ""){
             alert("Enter Valid Email");
             document.getElementById('email').focus();
@@ -24,6 +25,16 @@
         else if(!validateEmail(email)){
             alert("Enter propar email Ex 'jhon@gmail.com'");
             document.getElementById('email').focus();
+            return;
+        }
+        else if(pass == ""){
+              alert("Enter Valid Password");
+            document.getElementById('pwd').focus();
+            return;
+        }
+        else if(pass.length < 8){
+            alert("Maximum char 8");
+                        document.getElementById('pwd').focus();
             return;
         }
    }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Document</title>
+    <style>
+        .box{
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+        }
+        #yellowbtn{
+            background-color: yellow;
+            text-align: center;
+            padding: 5px;
+            color: blue;
+        }
+        #redbtn{
+            background-color: red;
+            text-align: center;
+            padding: 5px;
+            color: white;
+        }
+        #bluebtn{
+            background-color: blue;
+            text-align: center;
+            padding: 5px;
+            color:white;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $("#yellowbtn").click(function(){
+                $("#box").css('background-color','yellow')
+            })
+            $("#redbtn").click(function(){
+                $("#box").css('background-color','red')
+            })
+            $("#bluebtn").click(function(){
+                $("#box").css('background-color','blue')
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="box" id="box"   >
+
+    </div>
+    <button id="yellowbtn">Click</button>
+    <button id="redbtn">Click</button>
+
+    <button id="bluebtn">Click</button>
+
+</body>
+</html>
