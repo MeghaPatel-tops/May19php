@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ajax Crud
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>User Registration Form</h2>
+  <form>
+    <div class="form-group">
+      <label for="email">Name:</label>
+      <input type="text" class="form-control" id="username" placeholder="Enter UserName" name="email">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+    </div>
+    <div class="form-group">
+      <label for="email">Contact:</label>
+      <input type="email" class="form-control" id="cnno" placeholder="Enter contact" name="email">
+    </div>
+    <button type="button" class="btn btn-default" onclick="addUser()">Submit</button>
+  </form>
+
+  <h1>Users Info</h1>
+  <div class="table-responsive">
+  <table class="table">
+     <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Contact</th>
+            
+        </tr>
+     </thead>
+     <tbody id="userinfo">
+     </tbody>
+  </table>
+</div>
+</div>
+
+<script>
+    function addUser(){
+        let username = document.getElementById('username').value;
+        let email =document.getElementById('email').value;
+        let pwd =document.getElementById('pwd').value;
+        let cnno =document.getElementById('cnno').value;
+
+        $.ajax({
+            type:"POST",
+            url:"webservice.php/adduser",
+            data:{'uname':username,'email':email,'pwd':pwd,'cnno':cnno},
+            success:function(data){
+                data=JSON.parse(data);
+                alert(data.msg);
+                getUsers();
+
+            },
+            error:function(error){
+                alert(error.message);
+            }
+        })
+
+    }
+</script>
+<script>
+    function getUsers(){
+        $.ajax({
+            type:"GET",
+            url:"webservice.php/getusers",
+            success:function(data){
+
+                prepareTable(data);
+            },
+            error:function(error){
+                alert(error);
+            }
+        })
+    }
+
+
+    function prepareTable(data){
+      data = JSON.parse(data);
+        let str="";
+        data.map((index)=>{
+            str+=`
+        <tr>
+            <td>${index.uname}</td>
+            <td>${index.email}</td>
+            <td>${index.contact}</td>
+        </tr>`;
+        });
+        document.getElementById('userinfo').innerHTML=str;
+    }
+    window.onload=getUsers();
+</script>
+</body>
+</html>
