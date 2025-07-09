@@ -99,11 +99,54 @@
             <td>${index.uname}</td>
             <td>${index.email}</td>
             <td>${index.contact}</td>
+            <td><button class="btn btn-danger" onclick="delUser(${index.uid})">DELETE</button>
+            <td><button class="btn btn-success" onclick="EditUser(${index.uid})">EDIT</button>
         </tr>`;
         });
         document.getElementById('userinfo').innerHTML=str;
     }
     window.onload=getUsers();
+    //============================delete user==========================
+    function delUser(uid){
+       $.ajax({
+        type:"POST",
+        url:"webservice.php/deluser",
+        data:{userid:uid},
+        success:function(data){
+          alert(data);
+          getUsers();
+
+        },
+        error:function(error){
+          alert(error);
+        }
+       })
+    }
+
+    //=============================Edit User=============================
+    function EditUser(uid){
+         $.ajax({
+            type:"GET",
+            data:{userid:uid},
+            url:"webservice.php/edituser",
+            success:function(data){
+              alert(data)
+              printEditData(data);
+            },
+            error:function(error){
+               alert(data)
+            }
+         })
+    }
+
+    function printEditData(data){
+       data = JSON.parse(data);
+       
+        document.getElementById('username').value = data.uname;
+        document.getElementById('email').value=data.email;
+        document.getElementById('pwd').value=data.password;
+        document.getElementById('cnno').value=data.contact;
+    }
 </script>
 </body>
 </html>

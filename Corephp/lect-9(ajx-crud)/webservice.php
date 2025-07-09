@@ -32,6 +32,29 @@
             echo json_encode($users);
        }
 
+       //For Delete user
+       if($path=="/deluser"){
+           $uid=$_POST['userid'];
+           $query = "delete from users where uid=$uid";
+           $result=$connection->query($query);
+           if(isset($result)){
+              echo "Data successfully Deleted";
+           }
+       }
+
+       //Edit  user
+       if($path == "/edituser"){
+            $uid=$_GET['userid'];
+            $query="select * from users where uid=$uid";
+            $req=$connection->query($query);
+            $user = $req->fetch_object();
+            if($user){
+                echo json_encode($user);
+            }
+
+
+       }
+
    }
 
 
