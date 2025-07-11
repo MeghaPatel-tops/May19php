@@ -55,6 +55,23 @@
 
        }
 
+       //update user
+       if($path=="/updateuser"){
+            
+           $cnno=$_POST["cnno"];
+           $pwd=$_POST["pwd"];
+           $email=$_POST["email"];
+           $uname=$_POST["uname"];
+           $uid = $_POST['uid'];
+
+           $query ="update users set uname='$uname',email='$email',password='$pwd',contact='$cnno' where uid=$uid";
+
+           $result=$connection->query($query);
+           if($result){
+                echo "Data successfully Update";
+           }
+       }
+
    }
 
 

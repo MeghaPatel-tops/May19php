@@ -16,6 +16,7 @@
   <form>
     <div class="form-group">
       <label for="email">Name:</label>
+      <input type="hidden" name="" id="userid">
       <input type="text" class="form-control" id="username" placeholder="Enter UserName" name="email">
     </div>
     <div class="form-group">
@@ -30,7 +31,9 @@
       <label for="email">Contact:</label>
       <input type="email" class="form-control" id="cnno" placeholder="Enter contact" name="email">
     </div>
-    <button type="button" class="btn btn-default" onclick="addUser()">Submit</button>
+    <button type="button" class="btn btn-default" onclick="addUser()" id="addbtn">Submit</button>
+     <button type="button" class="btn btn-default" onclick="updateUser()" id="updatebtn">Update</button>
+
   </form>
 
   <h1>Users Info</h1>
@@ -51,6 +54,40 @@
 </div>
 
 <script>
+  function cleanUp(){
+    
+        document.getElementById('username').value="";
+        document.getElementById('email').value="";
+        document.getElementById('pwd').value="";
+        document.getElementById('cnno').value="";
+        document.getElementById('userid').value="";
+  }
+  function updateUser(){
+      
+        let username = document.getElementById('username').value;
+        let email =document.getElementById('email').value;
+        let pwd =document.getElementById('pwd').value;
+        let cnno =document.getElementById('cnno').value;
+        let uid = document.getElementById('userid').value;
+
+
+        $.ajax({
+          type:"POST",
+          url:"webservice.php/updateuser",
+          data:{"uname":username,"email":email,"pwd":pwd,"cnno":cnno,"uid":uid},
+          success:function(data){
+              
+              alert(data)
+              cleanUp();
+              document.getElementById('addbtn').style.display = "block";
+              getUsers();
+          },
+          error:function(error){
+              console.log(error);
+              
+          }
+        })
+  }
     function addUser(){
         let username = document.getElementById('username').value;
         let email =document.getElementById('email').value;
@@ -64,6 +101,7 @@
             success:function(data){
                 data=JSON.parse(data);
                 alert(data.msg);
+                cleanUp();
                 getUsers();
 
             },
@@ -76,6 +114,7 @@
 </script>
 <script>
     function getUsers(){
+      document.getElementById('updatebtn').style.display = "none";
         $.ajax({
             type:"GET",
             url:"webservice.php/getusers",
@@ -125,6 +164,7 @@
 
     //=============================Edit User=============================
     function EditUser(uid){
+      
          $.ajax({
             type:"GET",
             data:{userid:uid},
@@ -132,6 +172,8 @@
             success:function(data){
               alert(data)
               printEditData(data);
+              document.getElementById('addbtn').style.display = "none";
+              document.getElementById('updatebtn').style.display = "block";
             },
             error:function(error){
                alert(data)
@@ -146,6 +188,7 @@
         document.getElementById('email').value=data.email;
         document.getElementById('pwd').value=data.password;
         document.getElementById('cnno').value=data.contact;
+        document.getElementById('userid').value= data.uid;
     }
 </script>
 </body>
