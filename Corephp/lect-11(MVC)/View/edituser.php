@@ -25,14 +25,14 @@
 
   <form method="POST" action="userstore">
     <div class="row"><div class="col">
-        <input type="text" class="form-control" placeholder="Enter Username" name="username">
+        <input type="text" class="form-control" placeholder="Enter Username" name="username" value="<?php echo $userData->username?>">
       </div></div>
     <div class="row mt-5">
       <div class="col">
-        <input type="text" class="form-control" placeholder="Enter email" name="email">
+        <input type="text" class="form-control" placeholder="Enter email" name="email" value="<?php echo $userData->email?>">
       </div>
       <div class="col">
-        <input type="password" class="form-control" placeholder="Enter password" name="pswd">
+        <input type="password" class="form-control" placeholder="Enter password" name="pswd" value="<?php echo $userData->password?>">
       </div>
     </div>
     <div class="row mt-5">

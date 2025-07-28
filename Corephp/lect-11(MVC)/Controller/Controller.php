@@ -31,11 +31,34 @@ class Controller extends Model{
                 header("Location:usercreate");
             }
             else{
-                $userData = ['username'=>$username,"email"=>$email,"pswd"=>$pswd];
-                print_r($userData);
+                $userData = ['username'=>$username,"email"=>$email,"password"=>$pswd];
+                $res=$this->insertData("users",$userData);
+                if($res){
+                    header("Location:".$baseurl."userview");
+                }
             }
             
         }
+    }
+
+    public function viewUser(){
+        $userData=$this->selectAll("users");
+        include('View/userview.php');
+    }
+
+    public function deleteUser(){
+        echo $id=$_REQUEST['uid'];
+        $result = $this->deleteData($id);
+        if($id){
+           header("Location:".$baseurl."userview");
+        }
+    }
+
+    public function editUser(){
+          $id=$_REQUEST['uid'];
+         $result=$this->selectWhere("users",['id'=>$id]);
+        $userData=$result[0];
+        include('View/edituser.php');
     }
 }
 
