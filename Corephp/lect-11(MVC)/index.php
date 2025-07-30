@@ -33,6 +33,9 @@ if(isset($_SERVER['PATH_INFO'])){
     else if($path == '/edituser'){
         $Obj->editUser();
     }
+     else if($path == '/userupdate'){
+        $Obj->userupdate();
+    }
 }
 
 

@@ -48,6 +48,27 @@
         return $rw??[];
     }
 
+    public function updateData($table,$data,$where){
+        $query="update $table set ";
+        $count= count($data);
+        $i=1;
+        foreach($data as $key =>$value){
+            if($i<$count){
+                $query.= $key ."='".$value."',";
+            }
+            else{
+                $query.= $key ."='".$value."'";
+            }
+            $i++;
+        }
+        $query.="where 1=1  ";
+        foreach($where as $key=>$value){
+            $query.=" And ".$key ."='".$value."'";
+        }
+         $result = $this->con->query($query);
+        return $result;
+    }
+
  }
 
 

@@ -23,8 +23,9 @@
    
   <h2>User Forms</h2>
 
-  <form method="POST" action="userstore">
+  <form method="POST" action="userupdate">
     <div class="row"><div class="col">
+      <input type="hidden" name="uid" value="<?php echo $userData->id?>">
         <input type="text" class="form-control" placeholder="Enter Username" name="username" value="<?php echo $userData->username?>">
       </div></div>
     <div class="row mt-5">
