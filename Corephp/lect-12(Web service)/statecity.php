@@ -3,6 +3,6 @@
      
     $postArray = json_decode($post);
 
-    print_r($post);
+    print_r($post); 
 
 ?>
