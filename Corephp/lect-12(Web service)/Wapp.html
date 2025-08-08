@@ -16,26 +16,31 @@
   <h2>Weather App form</h2>
   <form method="post">
     <div class="mb-3 mt-3">
-       <select class="form-select mt-3">
-     <option>1</option>
-     <option>2</option>
-     <option>3</option>
-     <option>4</option>
+      <label for="pwd">Countries:</label>
+       <select class="form-select mt-3" id="country" onchange="getState(this.value)">
+    
    </select>
    
     </div>
-    <div class="mb-3">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+    <div class="mb-3 mt-3">
+      <label for="pwd">States:</label>
+       <select class="form-select mt-3" id="state" onchange="getCity(this.value)">
+    
+   </select>
+   
     </div>
-    <div class="form-check mb-3">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" name="remember"> Remember me
-      </label>
+     <div class="mb-3 mt-3">
+      <label for="pwd">States:</label>
+       <select class="form-select mt-3" id="city" onchange="getApp(this.value)">
+    
+   </select>
+   
     </div>
+    
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+<div class="res" id="res"></div>
 
 </body>
 </html>

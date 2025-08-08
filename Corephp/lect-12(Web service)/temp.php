@@ -32,16 +32,7 @@ if(isset($_REQUEST['city'])){
     }
 }
 
-if(isset($_REQUEST['countryapi'])){
-    $query = "select * from countries";
-    $req=$con->query($query);
-    while($row = $req->fetch_object()){
-        $rw[]=$row;
-    }
-   // echo count($rw);
-    $rw = $rw ?? [];
-    echo json_encode($rw);
-}
+
 
 ?>
 
