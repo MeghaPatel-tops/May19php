@@ -28,3 +28,11 @@ Route::get('/test1',[TesController::class,'testMethod']);
 Route::get('/single',PostController::class);
 
 Route::resource('products',ProdcutController::class);
+
+
+// Route::get('/home1',function(){
+//     return view('home')->with('name','Ronak')->with('cource','php');
+// });
+// Route::view('/home1','home');
+
+Route::get('/home1',[TesController::class,'commanFunction']);
