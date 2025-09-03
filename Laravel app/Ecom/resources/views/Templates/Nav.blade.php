@@ -159,8 +159,7 @@
               </a>
             </li>
             <li class="d-none d-lg-block">
-              <a href="index.html" class="text-uppercase mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                aria-controls="offcanvasCart">Cart <span class="cart-count">(0)</span>
+              <a href="{{route('login')}}" class="text-uppercase mx-3" >Login
               </a>
             </li>
             <li class="d-lg-none">

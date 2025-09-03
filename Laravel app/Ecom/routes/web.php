@@ -21,3 +21,9 @@ Route::resource('product',ProductController::class);
 
 Route::resource('user',UserController::class);
 
+Route::get('/login',[UserController::class,'login']);
+
+Route::post('/loginuser',[UserController::class,'loginUser'])->name('loginuser');
+
+Route::get('/profile',[UserController::class,'profile'])->name('profile');
+Route::get('/logout',[UserController::class,'logout'])->name('logout');

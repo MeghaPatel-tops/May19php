@@ -44,6 +44,9 @@ class UserController extends Controller
 
          $file = $request->file('profileimg');
          $path = $file->store('uploads','public');
+         $fileOriginalName = $file->getClientOriginalExtension();
+            $fileNewName = time() .'.'. $fileOriginalName;
+             $file->storeAs('uploads', $fileNewName, 'public');
          
          $result= DB::table('appuser')->insert([
             'username'=>$request->username,
@@ -90,5 +93,46 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function login(){
+          return view('User.login');
+    }
+
+    public function loginUser(Request $request){
+        
+        //print_r($request->all());
+        $userEmail= [
+            'email'=>$request->email
+        ];
+         $userData = DB::table('appuser')->where($userEmail)->first();
+         if(isset($userData)){
+             if (Hash::check($request->password,$userData->password)) {
+                    $request->session()->put('user',$userData);
+                    return redirect('/profile');
+            }
+            else{
+                echo "fail";
+            }
+         }
+         else{
+                echo "fail";
+            }
+    }
+
+    public function profile(Request $request){
+           $currentUser =$request->session()->get('user');
+           if(isset($currentUser)){
+                return view('User.profile',['user'=>$currentUser]);
+           }
+           else{
+                 return redirect('/login');
+           }
+           
+    }
+
+    public function logout(Request $request){
+        $request->session()->forget('user');
+        return redirect('/login');
     }
 }
