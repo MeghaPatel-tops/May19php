@@ -122,12 +122,8 @@ class UserController extends Controller
 
     public function profile(Request $request){
            $currentUser =$request->session()->get('user');
-           if(isset($currentUser)){
                 return view('User.profile',['user'=>$currentUser]);
-           }
-           else{
-                 return redirect('/login');
-           }
+           
            
     }
 

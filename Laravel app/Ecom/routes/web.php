@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AuthMiddleware;
 
 
 Route::get('/', function () {
@@ -25,5 +26,9 @@ Route::get('/login',[UserController::class,'login']);
 
 Route::post('/loginuser',[UserController::class,'loginUser'])->name('loginuser');
 
-Route::get('/profile',[UserController::class,'profile'])->name('profile');
-Route::get('/logout',[UserController::class,'logout'])->name('logout');
+
+
+Route::middleware(AuthMiddleware::class)->group(function(){
+        Route::get('/profile',[UserController::class,'profile'])->name('profile');
+        Route::get('/logout',[UserController::class,'logout'])->name('logout');     
+});
