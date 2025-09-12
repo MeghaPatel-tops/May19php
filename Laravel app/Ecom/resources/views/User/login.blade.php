@@ -39,14 +39,20 @@
                
                 <div class="col-12">
                   <label for="lastName" class="form-label">Enter Email <span class="text-danger">*</span></label>
-                  <input type="email" class="form-control" name="email" id="lastName" placeholder="Enter Email" >
+                  <input type="email" class="form-control" name="email" id="lastName" placeholder="Enter Email"  value="{{Cookie::get('email')}}">
                 </div>
               
                 <div class="col-12">
                   <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                  <input type="password" class="form-control" name="password" id="password" value="" >
+                  <input type="password" class="form-control" name="password" id="password" value="{{Cookie::get('pwd')}}">
                 </div>
-               
+                <div class="col-12">
+                 
+                    <input type="checkbox" name="rem"
+                   
+                    ><span>&nbsp;Remember me</span>
+                  
+                </div>
                  <div class="col-12">
                   <div class="d-grid">
                     <input type="submit" class="btn bsb-btn-xl btn-primary" >Sign up</button>

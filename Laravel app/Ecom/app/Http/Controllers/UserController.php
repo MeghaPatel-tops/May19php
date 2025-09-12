@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
+
 
 
 
@@ -101,7 +103,7 @@ class UserController extends Controller
 
     public function loginUser(Request $request){
         
-        //print_r($request->all());
+        
         $userEmail= [
             'email'=>$request->email
         ];
@@ -109,7 +111,14 @@ class UserController extends Controller
          if(isset($userData)){
              if (Hash::check($request->password,$userData->password)) {
                     $request->session()->put('user',$userData);
+                     if($request->rem){
+                        $emailcookie= Cookie::queue('email',$request->email,3600);
+                    $passcookie= Cookie::queue('pwd',$request->password,3600);
+    
+                    }
                     return redirect('/profile');
+                   
+
             }
             else{
                 echo "fail";

@@ -27,7 +27,13 @@ class ProdcutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->pname == "" ){
+            return back()->with('msg','Invalid product name');
+        }
+        else{
+            //return redirect()->route('product.index');
+            return redirect()->route('product.show',1);
+        }
     }
 
     /**
@@ -35,7 +41,7 @@ class ProdcutController extends Controller
      */
     public function show(string $id)
     {
-         echo "show method";
+         echo "show method   ".$id;
     }
 
     /**

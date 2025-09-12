@@ -22,7 +22,7 @@ Route::resource('product',ProductController::class);
 
 Route::resource('user',UserController::class);
 
-Route::get('/login',[UserController::class,'login']);
+Route::get('/login',[UserController::class,'login'])->name('login');
 
 Route::post('/loginuser',[UserController::class,'loginUser'])->name('loginuser');
 
