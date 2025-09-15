@@ -4,19 +4,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Controllers\Admin\CategoryController;
 
 
-Route::get('/', function () {
-    return view('Home');
-});
+Route::get('/', [UserController::class,'index']);
 
 Route::get('/about', function () {
     return view('About');
 });
 
-Route::get('/admin',function(){
-    return view('Admin.adminmaster');
+Route::prefix('admin')->group(function () {
+  
+ Route::resource('/category',CategoryController::class);
+
 });
+
+
+
 
 Route::resource('product',ProductController::class);
 

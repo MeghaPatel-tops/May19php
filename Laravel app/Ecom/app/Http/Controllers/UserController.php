@@ -18,7 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $categories= DB::table('catgory')->get();
+         return view('Home',["catData"=>$categories]);
     }
 
     /**
