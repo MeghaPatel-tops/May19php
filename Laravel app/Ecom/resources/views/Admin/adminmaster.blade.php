@@ -16,7 +16,7 @@
       <a class="navbar-brand" href="#">ECOM</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Category</a></li>
+      <li class="active"><a href="{{route('category.index')}}">Category</a></li>
       <li><a href="#">Product</a></li>
       <li><a href="#">Users</a></li>
       <li><a href="#">Page 3</a></li>

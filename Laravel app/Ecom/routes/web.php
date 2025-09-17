@@ -14,15 +14,18 @@ Route::get('/about', function () {
 });
 
 Route::prefix('admin')->group(function () {
-  
- Route::resource('/category',CategoryController::class);
+    Route::get('/',function(){
+       return view('Admin.adminmaster');
+    });
+    Route::resource('/category',CategoryController::class);
+    Route::resource('/product',ProductController::class);
+
 
 });
 
 
 
 
-Route::resource('product',ProductController::class);
 
 Route::resource('user',UserController::class);
 
