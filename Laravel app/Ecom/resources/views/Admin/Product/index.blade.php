@@ -17,6 +17,7 @@
     </div>
 @endif
 <h1>Product </h1>
+<a href="{{route('product.create')}}" class="btn btn-primary">Add New</a>
  <table class="table table-borderd" >
        <thead>  
          <tr>

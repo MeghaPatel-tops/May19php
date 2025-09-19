@@ -46,9 +46,12 @@
                   <a class="nav-link dropdown-toggle" href="#" id="dropdownShop" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Shop By Category</a>
                   <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownShop">
+                     <li>
+                      <button  onclick="getProductByCat(0)" href="#" class="dropdown-item item-anchor">all </button>
+                    </li>
                     @foreach($catData as $key)
                     <li>
-                      <a href="#" class="dropdown-item item-anchor">{{$key->cname}} </a>
+                      <button  onclick="getProductByCat({{$key->id}})" href="#" class="dropdown-item item-anchor">{{$key->cname}} </button>
                     </li>
                     @endforeach
                   </ul>

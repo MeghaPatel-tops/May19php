@@ -17,7 +17,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="{{route('category.index')}}">Category</a></li>
-      <li><a href="#">Product</a></li>
+      <li><a href="{{route('product.index')}}">Product</a></li>
       <li><a href="#">Users</a></li>
       <li><a href="#">Page 3</a></li>
     </ul>

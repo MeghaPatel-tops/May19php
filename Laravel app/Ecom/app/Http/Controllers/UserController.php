@@ -19,7 +19,8 @@ class UserController extends Controller
     public function index()
     {
         $categories= DB::table('catgory')->get();
-         return view('Home',["catData"=>$categories]);
+        $products= DB::table('products')->get();
+         return view('Home',["catData"=>$categories,'products'=>$products]);
     }
 
     /**
@@ -140,5 +141,16 @@ class UserController extends Controller
     public function logout(Request $request){
         $request->session()->forget('user');
         return redirect('/login');
+    }
+
+    public function getProduct(Request $request){
+          $id= $request->id;
+          if(isset($id)){
+            $products= DB::table('products')->where('catid',$id)->get();
+          }
+          else{
+             $products= DB::table('products')->get();
+          }
+          return json_encode($products);
     }
 }

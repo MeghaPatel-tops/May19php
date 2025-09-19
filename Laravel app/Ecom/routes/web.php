@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\CategoryController;
 
 Route::get('/', [UserController::class,'index']);
 
+Route::get('/getproduct/{id?}',[UserController::class,'getProduct']);
+
 Route::get('/about', function () {
     return view('About');
 });
