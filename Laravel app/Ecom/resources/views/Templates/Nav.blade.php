@@ -71,12 +71,19 @@
         <div class="col-3 col-lg-auto">
           <ul class="list-unstyled d-flex m-0">
             <li class="d-none d-lg-block">
-              <a href="index.html" class="text-uppercase mx-3">Wishlist <span class="wishlist-count">(0)</span>
+              <a href="{{route('cart')}}" class="text-uppercase mx-3">Wishlist <span class="wishlist-count">({{$cartCount ?? 0}})</span>
               </a>
             </li>
             <li class="d-none d-lg-block">
-              <a href="{{route('login')}}" class="text-uppercase mx-3" >Login
+             
+              @if(@session('user'))
+              <span>Welcome :{{session('user')->username}}</span>
+              <a href="{{route('logout')}}" class="text-uppercase mx-3" >Logout
               </a>
+              @else
+                 <a href="{{route('login')}}" class="text-uppercase mx-3" >Login
+              </a>
+              @endif
             </li>
             <li class="d-lg-none">
               <a href="#" class="mx-2">

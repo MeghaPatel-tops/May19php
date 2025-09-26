@@ -16,11 +16,15 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $sessionUser = $request->session('user')->get('user');
         $categories= DB::table('catgory')->get();
         $products= DB::table('products')->get();
-         return view('Home',["catData"=>$categories,'products'=>$products]);
+        $cartData = DB::table('addtocart')->where('uid',$sessionUser->uid)->get();
+        $cartCount =count($cartData);
+     
+         return view('Home',["catData"=>$categories,'products'=>$products,"cartCount"=>$cartCount]);
     }
 
     /**
@@ -118,7 +122,7 @@ class UserController extends Controller
                     $passcookie= Cookie::queue('pwd',$request->password,3600);
     
                     }
-                    return redirect('/profile');
+                    return redirect('/');
                    
 
             }
