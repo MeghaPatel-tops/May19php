@@ -38,4 +38,5 @@ Route::middleware(AuthMiddleware::class)->group(function(){
         Route::get('/profile',[UserController::class,'profile'])->name('profile');
         Route::get('/logout',[UserController::class,'logout'])->name('logout');  
         Route::get('/cart',[AddTocart::class,'viewcart'])->name('cart') ;
+        Route::post('/order',[AddTocart::class,'order'])->name('order');
 });

@@ -19,12 +19,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $sessionUser = $request->session('user')->get('user');
+        if(isset($sessionUser)){
+            $cartData = DB::table('addtocart')->where('uid',$sessionUser->uid )->get();
+            $cartCount =count($cartData);
+        }
         $categories= DB::table('catgory')->get();
         $products= DB::table('products')->get();
-        $cartData = DB::table('addtocart')->where('uid',$sessionUser->uid)->get();
-        $cartCount =count($cartData);
      
-         return view('Home',["catData"=>$categories,'products'=>$products,"cartCount"=>$cartCount]);
+         return view('Home',["catData"=>$categories,'products'=>$products,"cartCount"=>$cartCount ?? 0]);
     }
 
     /**
