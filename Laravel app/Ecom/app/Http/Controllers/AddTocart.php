@@ -97,4 +97,24 @@ class AddTocart extends Controller
         return $response;
 
     }
+
+    function payment(Request $request){
+       try {
+            $sessionUser = session('user');
+        $uid = $sessionUser->uid ?? null;
+            $insertArray =[
+                'rzp_order_id' =>$request->razorpay_order_id,
+                'rzp_payment_id'=>$request->razorpay_payment_id,
+                'rzp_signature'=>$request->razorpay_signature,
+                'uid'=>$uid,
+                'created_at'=>now()
+            ];
+    
+       DB::table('payment')->insert($insertArray);
+         return redirect()->route('success')->with(['msg'=>"successs",'pro'=>$insertArray]);
+       } catch (\Throwable $th) {
+        return redirect()->route('fail')->with(['err'=> $th->getMessage()]);
+       }
+
+    }
 }

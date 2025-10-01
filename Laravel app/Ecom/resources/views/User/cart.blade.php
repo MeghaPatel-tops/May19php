@@ -65,34 +65,53 @@ function order(){
            data = JSON.parse(data)
             alert(data.id) 
              var options = {
-       "key": "rzp_test_GqyF5g931GFt3g", 
-       "amount": "<?php echo $total;?>", 
-       "currency": "INR",
-       "name": "Dummy Academy",
-       
-       "order_id": data.id,  
-       "handler": function (response){
-           console.log(response)
-           alert("This step of Payment Succeeded");
+                        "key": "rzp_test_GqyF5g931GFt3g", 
+                        "amount": "<?php echo $total;?>", 
+                        "currency": "INR",
+                        "name": "Dummy Academy",
+                        
+                        "order_id": data.id,  
+                        "handler": function (response){
+                            console.log(response)
+                        alert("This step of Payment Succeeded");
+                        $.ajax({
+                            method:"POST",
+                            url:"{{route('payment')}}",
+                            headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" },
+                                data: {
+                                            razorpay_order_id: response.razorpay_order_id,
+                                            razorpay_payment_id: response.razorpay_payment_id,
+                                            razorpay_signature: response.razorpay_signature
+                                },
+                                success: function(res){
+                                            console.log("DB insert response:", res);
+                                            alert("Payment stored successfully!");
+                                            window.location.href = "/success"; 
+                                        }
+                            ,error: function(err){
+                                            console.error("Error saving payment:", err);
+                                            alert("Payment save failed!");
+                                        }
+                        })
        },
-       "prefill": {
-          //Here we are prefilling random contact
-         "contact":"9876543210", 
-           //name and email id, so while checkout
-         "name": "Twinkle Sharma",  
-         "email": "smtwinkle@gmail.com"  
-       }
-   };
-   var razorpayObject = new Razorpay(options);
-   console.log(razorpayObject);
-   razorpayObject.open();
-       e.preventDefault();
-   razorpayObject.on('payment.failed', function (response){
-         console.log(response);
-         alert("This step of Payment Failed");
-   });    
-          }
-        })
+                    "prefill": {
+                        //Here we are prefilling random contact
+                        "contact":"9876543210", 
+                        //name and email id, so while checkout
+                        "name": "Twinkle Sharma",  
+                        "email": "smtwinkle@gmail.com"  
+                    }
+            };
+            var razorpayObject = new Razorpay(options);
+            console.log(razorpayObject);
+            razorpayObject.open();
+                e.preventDefault();
+            razorpayObject.on('payment.failed', function (response){
+                    console.log(response);
+                    alert("This step of Payment Failed");
+            });    
+                    }
+                    })
    }
 </script>
   @endsection

@@ -39,4 +39,15 @@ Route::middleware(AuthMiddleware::class)->group(function(){
         Route::get('/logout',[UserController::class,'logout'])->name('logout');  
         Route::get('/cart',[AddTocart::class,'viewcart'])->name('cart') ;
         Route::post('/order',[AddTocart::class,'order'])->name('order');
+        Route::post('/paymentadd',[AddTocart::class,'payment'])->name('payment');
+        Route::get('/success',function(){
+            echo '<div class="alert alert-success" role="alert">
+               Payment Done
+                </div>';
+        })->name('success');
+         Route::get('/fail',function(){
+            echo '<div class="alert alert-danger" role="alert">
+               Payment Fail
+                </div>';
+        })->name('fail');
 });
